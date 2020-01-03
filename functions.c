@@ -80,7 +80,7 @@ void _add(stack_t **stack, unsigned int line_number)
         temp = *stack;
         while (temp != NULL)
         {
-
+awdawd
         }
 
 }
