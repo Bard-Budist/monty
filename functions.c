@@ -70,3 +70,16 @@ void _pop(stack_t **stack, unsigned int line_number)
     }
 }
 
+void _swap(stack_t **stack, unsigned int line_number)
+{
+    int tmp = 0;
+    if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
+    {
+        printf("L%d: can't swap, stack too short", line_number);
+        free_dlistint((*stack));
+        exit(EXIT_FAILURE);
+    }
+    tmp = (*stack)->n;
+    (*stack)->n = (*stack)->next->n;
+    (*stack)->next->n = tmp;
+}
