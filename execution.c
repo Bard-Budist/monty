@@ -64,8 +64,8 @@ void checkExecution(char *buffer)
 
 void executeCommand(char **Tokens)
 {
+
         int j = 0, i = 0;
-        
         while (Tokens[j] != NULL)
         {
                 if (callFunction(Tokens[j], j) == 1)
