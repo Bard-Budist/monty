@@ -19,7 +19,8 @@ int callFunction(char *tmp, int j)
         char *tem2;
         instruction_t tipos[] ={
                 {"push", _push}, {"pall", _pall}, {"pint", _pint},
-                {"pop", _pop}, {"add", _add}, {"nop", _nop}, {NULL, NULL}
+                {"pop", _pop}, {"add", _add}, {"nop", _nop},
+                {"swap", _swap}, {NULL, NULL}
         };
         j = j;
         tem2 = strtok(tmp, " ");
