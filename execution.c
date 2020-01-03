@@ -64,33 +64,21 @@ void checkExecution(char *buffer)
 
 void executeCommand(char **Tokens)
 {
-        int i = 0, j = 0;
-        instruction_t tipos[] ={
-                {"push", _push}, {"pall", _pall}, {"pint", _pint},
-                {"pop", _pop}, {"add", _add}, {"nop", _nop},
-                {"swap", _swap}, {NULL, NULL}
-        };
-        char *tmp;
 
-        tmp = strtok(Tokens[0], " ");
+        int j = 0, i = 0;
         while (Tokens[j] != NULL)
         {
-                i = 0;
-                while (tipos[i].opcode != NULL)
+                if (callFunction(Tokens[j], j) == 1)
                 {
-                        if (strcmp(tmp, tipos[i].opcode) == 0)
-                        {
-                                if ((tmp = strtok(NULL, " ")) == NULL)
-                                        tmp = "";
-                                tipos[i].f(&stack, _atoi(tmp));
-                                break;
-                        }
-                        i++;
+                        i = 0;
+                        while (Tokens[i] != NULL)
+                                i++;
+                        free_grid(Tokens, i);
+                        fprintf(stderr, "L%d: unknown instruction %s", j, Tokens[j]);
+                        exit(EXIT_FAILURE);
                 }
                 j++;
-                tmp = strtok(Tokens[j], " ");
         }
-        free(tmp);
         i = 0;
         while (Tokens[i] != NULL)
                 i++;
