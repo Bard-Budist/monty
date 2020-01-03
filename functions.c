@@ -5,9 +5,6 @@ void _push(stack_t **stack, unsigned int line_number)
         new_node = malloc(sizeof(stack_t));
         if (new_node == NULL)
         {
-                /*
-                 * Free anything
-                 */ 
                 printf("Error: malloc failed");
                 exit(EXIT_FAILURE);
         }
@@ -70,3 +67,20 @@ void _pop(stack_t **stack, unsigned int line_number)
     }
 }
 
+void _add(stack_t **stack, unsigned int line_number)
+{
+
+        int i = 0;
+        stack_t *temp;
+        if (*stack == NULL)
+        {
+                prinf("L%d: can't add, stack too short", line_number);
+                exit(EXIT_FAILURE);
+        }
+        temp = *stack;
+        while (temp != NULL)
+        {
+
+        }
+
+}

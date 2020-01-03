@@ -5,17 +5,22 @@ int main(int argc, const char *argv[])
 {
         int state;
         char *buffer = NULL;
-        argc = argc;
+        if (argc != 2)
+        {
+                printf("USAGE: monty file");
+                exit(EXIT_FAILURE);
+        }
         if (argv[1] == NULL)
                 return (0);
+        state = open(argv[1], O_RDONLY, 0600);
+        if (state < 0)
+        {
+                printf("Error: Can't open file %s", argv[1]);
+                exit(EXIT_FAILURE);
+        }
         buffer = malloc(1024);
         if (buffer == NULL)
                 return (0);
-        state = open(argv[1], O_RDONLY, 0600);
-        if (state == -1)
-        {
-                return (0);                                                                                                        
-        }
         read(state, buffer, 1024);
         close(state);
         checkExecution(buffer);
@@ -61,10 +66,11 @@ void executeCommand(char **Tokens)
 {
         int i = 0, j = 0;
         instruction_t tipos[] ={
-                {"push", _push}, {"pall", _pall}, {"pint", _pint}, {"pop", _pop}, {NULL, NULL}
+                {"push", _push}, {"pall", _pall}, {"pint", _pint},
+                {"pop", _pop}, {NULL, NULL}
         };
+        char *tmp, *tmp2;
 
-        char *tmp;
         tmp = strtok(Tokens[0], " ");
         while (Tokens[j] != NULL)
         {
@@ -73,15 +79,25 @@ void executeCommand(char **Tokens)
                 {
                         if (strcmp(tmp, tipos[i].opcode) == 0)
                         {
-                                tmp = strtok(NULL, " ");
-                                if (tmp == NULL)
+                                if (tmp = strtok(NULL, " ") == NULL)
                                         tmp = "";
+                                if (strcmp(tmp, "push") == 0 && tmp == NULL)
+                                {
+                                        printf("L86: usage: push integer");
+                                        exit(EXIT_FAILURE);
+                                }
                                 tipos[i].f(&stack, _atoi(tmp));
                                 break;
                         }
                         i++;
                 }
                 j++;
+                if (tmp2 = malloc((strlen(tmp) + 1) * sizeof(char)) == NULL)
+                {
+                        free(tmp);
+                        printf("Error: malloc failed");
+                        exit(EXIT_FAILURE);
+                }
                 tmp = strtok(Tokens[j], " ");
         }
         free(tmp);
