@@ -5,17 +5,22 @@ int main(int argc, const char *argv[])
 {
         int state;
         char *buffer = NULL;
-        argc = argc;
+        if (argc != 2)
+        {
+                fprintf(stderr, "USAGE: monty file");
+                exit(EXIT_FAILURE);
+        }
         if (argv[1] == NULL)
                 return (0);
+        state = open(argv[1], O_RDONLY, 0600);
+        if (state < 0)
+        {
+                fprintf(stderr, "Error: Can't open file %s", argv[1]);
+                exit(EXIT_FAILURE);
+        }
         buffer = malloc(1024);
         if (buffer == NULL)
                 return (0);
-        state = open(argv[1], O_RDONLY, 0600);
-        if (state == -1)
-        {
-                return (0);                                                                                                        
-        }
         read(state, buffer, 1024);
         close(state);
         checkExecution(buffer);
@@ -35,7 +40,7 @@ void checkExecution(char *buffer)
         if (commandsCut == NULL)
         {
                 free(buffer);
-                printf("Error: malloc failed");
+                fprintf(stderr, "Error: malloc failed");
                 exit(EXIT_FAILURE);
         }
         firstCommand = strtok(buffer, "\n");
@@ -45,7 +50,7 @@ void checkExecution(char *buffer)
                 if (commandsCut[i] == NULL)
                 {
                         free(buffer);
-                        printf("Error: malloc failed");
+                        fprintf(stderr, "Error: malloc failed");
                         exit(EXIT_FAILURE);
                 }
                 strcpy(commandsCut[i], firstCommand);
@@ -61,10 +66,11 @@ void executeCommand(char **Tokens)
 {
         int i = 0, j = 0;
         instruction_t tipos[] ={
-                {"push", _push}, {"pall", _pall}, {NULL, NULL}
+                {"push", _push}, {"pall", _pall}, {"pint", _pint},
+                {"pop", _pop}, {"add", _add}, {"nop", _nop}, {NULL, NULL}
         };
-
         char *tmp;
+
         tmp = strtok(Tokens[0], " ");
         while (Tokens[j] != NULL)
         {
@@ -73,9 +79,13 @@ void executeCommand(char **Tokens)
                 {
                         if (strcmp(tmp, tipos[i].opcode) == 0)
                         {
-                                tmp = strtok(NULL, " ");
-                                if (tmp == NULL)
+                                if ((tmp = strtok(NULL, " ")) == NULL)
                                         tmp = "";
+                                if (strcmp(tmp, "push") == 0 && tmp == NULL)
+                                {
+                                        fprintf(stderr, "L%d: usage: push integer", j);
+                                        exit(EXIT_FAILURE);
+                                }
                                 tipos[i].f(&stack, _atoi(tmp));
                                 break;
                         }
@@ -103,5 +113,5 @@ void free_grid(char **grid, int height)
                 {
                         free(grid[i]);
                 }
-        free(grid);
+        free(grid); 
 }
