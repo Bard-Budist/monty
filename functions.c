@@ -5,7 +5,7 @@ void _push(stack_t **stack, unsigned int line_number)
         new_node = malloc(sizeof(stack_t));
         if (new_node == NULL)
         {
-                printf("Error: malloc failed");
+                fprintf(stderr, "Error: malloc failed");
                 exit(EXIT_FAILURE);
         }
         new_node->n = line_number;
@@ -27,12 +27,17 @@ void _push(stack_t **stack, unsigned int line_number)
 
 void _pall(stack_t **stack, unsigned int line_number)
 {
+        int i = 0;
         stack_t *new_node = *stack;
         line_number = line_number;
         while (new_node != NULL)
         {
+                i++;
                 printf("%i\n", new_node->n);
-                new_node = new_node->next;
+                if (new_node->next != NULL)
+                        new_node = new_node->next;
+                else
+                        new_node = NULL;
         }
 }
 
@@ -40,7 +45,7 @@ void _pint(stack_t **stack, unsigned int line_number)
 {
     if (*stack == NULL || stack == NULL)
     {
-        printf("L%d: can't pint, stack empty\n", line_number);
+        fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
         exit(EXIT_FAILURE);
     }
     printf("%d\n", (*stack)->n);
@@ -52,7 +57,7 @@ void _pop(stack_t **stack, unsigned int line_number)
 
     if (*stack == NULL)
     {
-        printf("L%d: can't pop an empty stack\n", line_number);
+        fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
         exit(EXIT_FAILURE);
     }
     if ((*stack)->next != NULL)
@@ -74,13 +79,21 @@ void _add(stack_t **stack, unsigned int line_number)
         stack_t *temp;
         if (*stack == NULL)
         {
-                prinf("L%d: can't add, stack too short", line_number);
+                fprintf(stderr, "L%d: can't add, stack too short", line_number);
                 exit(EXIT_FAILURE);
         }
         temp = *stack;
         while (temp != NULL)
         {
-awdawd
+                i++;
+                temp = temp->next;
         }
-
+        if (i < 2)
+        {
+                free(temp);
+                fprintf(stderr, "L%d: can't add, stack too short", line_number);
+                exit(EXIT_FAILURE);
+        }
+        free(temp);
+        sum_2(stack);
 }
