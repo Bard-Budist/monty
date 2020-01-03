@@ -61,7 +61,7 @@ void executeCommand(char **Tokens)
 {
         int i = 0, j = 0;
         instruction_t tipos[] ={
-                {"push", _push}, {"pall", _pall}, {NULL, NULL}
+                {"push", _push}, {"pall", _pall}, {"pint", _pint}, {NULL, NULL}
         };
 
         char *tmp;
