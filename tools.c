@@ -50,3 +50,20 @@ void free_dlistint(stack_t *head)
         }
         free(head);
 }
+void sum_2(stack_t **stack)
+{
+        int n1 = 0, n2 = 0;
+
+        n1 = (*stack)->n;
+        n2 = (*stack)->next->n;
+        n1 = n1 + n2;
+        
+        _pop(stack, 0);
+        _pop(stack, 0);
+        _push(stack, n1);
+}
+void _nop(stack_t **stack, unsigned int line_number)
+{
+        stack = stack;
+        line_number = line_number;
+}
