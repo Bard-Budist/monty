@@ -17,28 +17,35 @@ int callFunction(char *tmp, int j)
 {
         int i = 0;
         char *tem2;
+        char deli[] = "\t ";
         instruction_t tipos[] ={
                 {"push", _push}, {"pall", _pall}, {"pint", _pint},
                 {"pop", _pop}, {"add", _add}, {"nop", _nop},
                 {"swap", _swap}, {NULL, NULL}
         };
         j = j;
-        tem2 = strtok(tmp, " ");
+        printf("Estoy chequeando funciones\n");
+        tem2 = strtok(tmp, deli);
         while (tipos[i].opcode != NULL)
         {
+                printf("-----Voy a comparar-----%s------\n", tmp);
                 if (strcmp(tem2, tipos[i].opcode) == 0)
                 {
-                        /*
-                        printf("%s\n", tem2);
-                        if (strcmp(tem2, "push") == 0 && (atoi(tem2 = strtok(NULL, " ")) == 0) && j > 1)
+                        printf("Voy a tokenizar el comando\n");
+                        tem2 = strtok(NULL, deli);
+                        if (tem2 == NULL)
+                                tem2 = "";
+                        else if (strcmp(tem2, "0") != 0 && _atoi(tem2) == 0)
                         {
                                 fprintf(stderr, "L%d: usage: push integer", j);
                                 exit(EXIT_FAILURE);
                         }
-                        */
-                        if ((tem2 = strtok(NULL, " ")) == NULL)
-                                tem2 = "";
-                        tipos[i].f(&stack, _atoi(tem2));
+                        printf("------Voy a ejecutar algo------\n");
+                        if (strcmp(tipos[i].opcode, "pall") == 0)
+                                tipos[i].f(&stack, j);
+                        else
+                                tipos[i].f(&stack, _atoi(tem2));
+                        printf("------Ejecute algo------\n");
                         return (0);
                 }
                 i++;

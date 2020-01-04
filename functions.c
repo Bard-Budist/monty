@@ -27,17 +27,16 @@ void _push(stack_t **stack, unsigned int line_number)
 
 void _pall(stack_t **stack, unsigned int line_number)
 {
-        int i = 0;
+        unsigned int i = 0;
         stack_t *new_node = *stack;
         line_number = line_number;
-        while (new_node != NULL)
+        while (i < line_number)
         {
-                i++;
                 printf("%i\n", new_node->n);
-                if (new_node->next != NULL)
+                i++;
+                if (i != line_number)
                         new_node = new_node->next;
-                else
-                        new_node = NULL;
+                printf("Print despues del next------%i\n", new_node->n);
         }
 }
 

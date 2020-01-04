@@ -36,6 +36,7 @@ void checkExecution(char *buffer)
         int i = 0;
         char **commandsCut;
         char *firstCommand;
+        char deli[] = "\t\n";
         commandsCut = malloc(countCommands(buffer) * sizeof(char *));
         if (commandsCut == NULL)
         {
@@ -43,10 +44,10 @@ void checkExecution(char *buffer)
                 fprintf(stderr, "Error: malloc failed");
                 exit(EXIT_FAILURE);
         }
-        firstCommand = strtok(buffer, "\n");
+        firstCommand = strtok(buffer, deli);
         while (firstCommand != NULL)
         {
-                commandsCut[i] = malloc((strlen(firstCommand) + 1) * sizeof(char));
+                commandsCut[i] = malloc((strlen(firstCommand)) * sizeof(char));
                 if (commandsCut[i] == NULL)
                 {
                         free(buffer);
@@ -54,7 +55,7 @@ void checkExecution(char *buffer)
                         exit(EXIT_FAILURE);
                 }
                 strcpy(commandsCut[i], firstCommand);
-                firstCommand = strtok(NULL, "\n");
+                firstCommand = strtok(NULL, deli);
                 i++;
         }
         free(firstCommand);
@@ -65,24 +66,22 @@ void checkExecution(char *buffer)
 void executeCommand(char **Tokens)
 {
 
-        int j = 0, i = 0;
-        while (Tokens[j] != NULL)
+        int j = 0, len = 0;
+        while (Tokens[len] != NULL)
+                len++;
+        while (j < len)
         {
+                printf("Estoen el while\n");
                 if (callFunction(Tokens[j], j) == 1)
                 {
-                        i = 0;
-                        while (Tokens[i] != NULL)
-                                i++;
-                        free_grid(Tokens, i);
+                        free_grid(Tokens, len);
                         fprintf(stderr, "L%d: unknown instruction %s", j, Tokens[j]);
                         exit(EXIT_FAILURE);
                 }
                 j++;
+                printf("Aqui fallo--%i", len);
         }
-        i = 0;
-        while (Tokens[i] != NULL)
-                i++;
-        free_grid(Tokens, i);
+        free_grid(Tokens, len);
 }
 /**
  * free_grid - function that free the double pointer
