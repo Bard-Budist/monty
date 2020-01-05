@@ -12,7 +12,7 @@ void _push(stack_t **stack, unsigned int line_number)
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
 	{
-		fprintf(stderr, "Error: malloc failed");
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 
 	}
@@ -103,7 +103,7 @@ void _swap(stack_t **stack, unsigned int line_number)
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
-		fprintf(stderr, "L%d: can't swap, stack too short", line_number);
+		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
 		free_dlistint((*stack));
 		exit(EXIT_FAILURE);
 	}
