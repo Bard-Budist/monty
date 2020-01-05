@@ -11,7 +11,8 @@ int callFunction(char *tmp, int j)
 	int i = 0;
 	char *tem2;
 	char deli[] = "\n\t ";
-	instruction_t tipos[] ={
+
+	instruction_t tipos[] = {
 		{"push", _push}, {"pall", _pall}, {"pint", _pint},
 		{"pop", _pop}, {"add", _add}, {"nop", _nop},
 		{"swap", _swap}, {NULL, NULL}

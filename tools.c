@@ -63,3 +63,18 @@ void _nop(stack_t **stack, unsigned int line_number)
 	stack = stack;
 	line_number = line_number;
 }
+/**
+ * _pint - pint
+ * @stack: Stack
+ * @line_number: Line number
+ *
+*/
+void _pint(stack_t **stack, unsigned int line_number)
+{
+	if (*stack == NULL || stack == NULL)
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	printf("%d\n", (*stack)->n);
+}
