@@ -32,6 +32,8 @@ int callFunction(char *tmp, int j)
 				return (2);
 			else if (strcmp(tipos[i].opcode, "pint") == 0 && stack == NULL)
 				return (3);
+			else if (strcmp(tipos[i].opcode, "pop") == 0 && stack == NULL)
+				return (4);
 			if (strcmp(tipos[i].opcode, "pall") == 0)
 				tipos[i].f(&stack, j);
 			else

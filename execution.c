@@ -75,7 +75,12 @@ void printErrors(int error, int line, char *buffer, FILE *file)
 			exit(EXIT_FAILURE);
 			break;
 		case 3:
-			fprintf(stderr, "L%u: can't pint, stack empty\n", line);
+			fprintf(stderr, "L%i: can't pint, stack empty\n", line);
+			freeAll(buffer, file);
+			exit(EXIT_FAILURE);
+			break;
+		case 4:
+			fprintf(stderr, "L%i: can't pop an empty stack\n", line);
 			freeAll(buffer, file);
 			exit(EXIT_FAILURE);
 			break;
