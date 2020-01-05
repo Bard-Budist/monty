@@ -108,7 +108,7 @@ int validateReturns(char *string, stack_t **stack)
 	else if (strcmp(string, "pchar") == 0 && stack == NULL)
 		return (13);
 	else if (strcmp(string, "pchar") == 0 && ((*stack)->n < 32
-			|| (*stack)->n > 126))
+			|| (*stack)->n > 125))
 		return (14);
 	else
 		return (0);
