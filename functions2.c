@@ -62,3 +62,14 @@ void _mod(stack_t **stack, unsigned int line_number)
 	_pop(stack, line_number);
 	_push(stack, resul);
 }
+/**
+ * _pchar -  computes the rest of the division of the second top element
+ * by the top element of the stack.
+ * @stack: pointer
+ * @line_number: the line number
+ */
+void _pchar(stack_t **stack, unsigned int line_number)
+{
+	line_number = line_number;
+	printf("%c\n", (*stack)->n);
+}
