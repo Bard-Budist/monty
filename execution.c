@@ -27,27 +27,12 @@ int main(int argc, const char *argv[])
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	buffer = malloc(buffer_size * sizeof(char));
-	if (buffer == NULL)
+	while (getline(&buffer, &buffer_size, file) != -1)
 	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
-	while (-1 != getline(&buffer, &buffer_size, file))
-	{
-		if (callFunction(buffer, j, file) == 1)
-		{
-			fprintf(stderr, "L%i: unknown instruction %s\n", j, buffer);
-			fclose(file);
-			free(buffer);
-			free_dlistint(&stack);
-			exit(EXIT_FAILURE);
-		}
+		printErrors(callFunction(buffer, j), j, buffer, file);
 		j++;
 	}
-	fclose(file);
-	free(buffer);
-	free_dlistint(&stack);
+	freeAll(buffer, file);
 	return (0);
 }
 
@@ -66,4 +51,44 @@ void free_grid(char **grid, int height)
 			free(grid[i]);
 		}
 	free(grid);
+}
+
+/**
+ * printErrors - Print Error
+ * @error: Number of error
+ * @line: Line number
+ * @buffer: Buffer
+ * @file: File
+*/
+void printErrors(int error, int line, char *buffer, FILE *file)
+{
+	switch (error)
+	{
+		case 1:
+			fprintf(stderr, "L%i: unknown instruction %s\n", line, buffer);
+			freeAll(buffer, file);
+			exit(EXIT_FAILURE);
+			break;
+		case 2:
+			fprintf(stderr, "L%i: usage: push integer\n", line);
+			freeAll(buffer, file);
+			exit(EXIT_FAILURE);
+			break;
+		case 3:
+			fprintf(stderr, "L%u: can't pint, stack empty\n", line);
+			freeAll(buffer, file);
+			exit(EXIT_FAILURE);
+			break;
+	}
+}
+/**
+ * freeAll - freee all
+ * @buffer: free buffer
+ * @file: File
+*/
+void freeAll(char *buffer, FILE *file)
+{
+	free(buffer);
+	free_dlistint(&stack);
+	fclose(file);
 }

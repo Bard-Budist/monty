@@ -3,11 +3,10 @@
  * callFunction - Function to call functions
  * @tmp: temporal
  * @j: J
- * @file: File
  * Return: 1 or 0
  *
 */
-int callFunction(char *tmp, int j, FILE *file)
+int callFunction(char *tmp, int j)
 {
 	int i = 0;
 	char *tem2;
@@ -16,10 +15,9 @@ int callFunction(char *tmp, int j, FILE *file)
 	instruction_t tipos[] = {
 		{"push", _push}, {"pall", _pall}, {"pint", _pint},
 		{"pop", _pop}, {"add", _add}, {"nop", _nop},
-		{"swap", _swap}, {"sub", _sub}, {"div", _div}, 
+		{"swap", _swap}, {"sub", _sub}, {"div", _div},
 		{NULL, NULL}
 	};
-	j = j;
 	tem2 = strtok(tmp, deli);
 	if (tem2 == NULL)
 		return (0);
@@ -30,14 +28,10 @@ int callFunction(char *tmp, int j, FILE *file)
 			tem2 = strtok(NULL, deli);
 			if (tem2 == NULL)
 				tem2 = "";
-			else if (strcmp(tipos[i].opcode, "push") == 0 && checkChar(tem2) == 1)
-			{
-				free(tmp);
-				free_dlistint(&stack);
-				fclose(file);
-				fprintf(stderr, "L%i: usage: push integer\n", j);
-				exit(EXIT_FAILURE);
-			}
+			if (strcmp(tipos[i].opcode, "push") == 0 && checkChar(tem2) == 1)
+				return (2);
+			else if (strcmp(tipos[i].opcode, "pint") == 0 && stack == NULL)
+				return (3);
 			if (strcmp(tipos[i].opcode, "pall") == 0)
 				tipos[i].f(&stack, j);
 			else
@@ -71,4 +65,3 @@ int checkChar(char *string)
 	}
 	return (0);
 }
-

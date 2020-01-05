@@ -21,13 +21,14 @@ void _sub(stack_t **stack, unsigned int line_number)
 	}
 	else
 	{
-		fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
+		fprintf(stderr, "L%d: can't sub, stack too short\n",
+				line_number);
 		exit(EXIT_FAILURE);
 	}
 }
 
 /**
- * _sub - divides the second top element of the stack by the top element of the stack.
+ * _div - divides the second top element of the stack by the top element
  * @stack: pointer to top
  * @line_number: integer
 */
