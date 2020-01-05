@@ -83,7 +83,7 @@ void printErrors(int error, int line, char *buffer, FILE *file)
 			fprintf(stderr, "L%i: can't add, stack too short\n", line);
 			break;
 		case 7:
-			fprintf(stderr, "L%i: can't sub, stack too short", line);
+			fprintf(stderr, "L%i: can't sub, stack too short\n", line);
 			break;
 	}
 	if (error != 0)
