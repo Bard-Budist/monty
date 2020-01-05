@@ -16,7 +16,7 @@ int callFunction(char *tmp, int j)
 		{"push", _push}, {"pall", _pall}, {"pint", _pint},
 		{"pop", _pop}, {"add", _add}, {"nop", _nop},
 		{"swap", _swap}, {"sub", _sub}, {"div", _div},
-		{NULL, NULL}
+		{"mul", _mul}, {"mod", _mod}, {NULL, NULL}
 	};
 	tem2 = strtok(tmp, deli);
 	if (tem2 == NULL)
@@ -98,6 +98,13 @@ int validateReturns(char *string, stack_t **stack)
 	else if (strcmp(string, "div") == 0 && (*stack)->n == 0
 			&& len >= 2)
 		return (9);
+	else if (strcmp(string, "mul") == 0 && len < 2)
+                return (10);
+	else if (strcmp(string, "mod") == 0 && len < 2)
+                return (11);
+	else if (strcmp(string, "mod") == 0 && (*stack)->n == 0
+                        && len >= 2)
+                return (12);
 	else
 		return (0);
 }
