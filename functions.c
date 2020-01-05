@@ -110,25 +110,21 @@ void _add(stack_t **stack, unsigned int line_number)
 	int i = 0;
 	stack_t *temp;
 
-	if (*stack == NULL)
-	{
-		fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
-		free_dlistint(stack);
-		exit(EXIT_FAILURE);
-	}
-	temp = *stack;
-	while (temp != NULL)
+	temp = (*stack);
+
+	while (temp)
 	{
 		i++;
 		temp = temp->next;
 	}
 	if (i < 2)
 	{
-		free(temp);
-		free_dlistint(stack);
-		fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
+		fprintf(stderr, "L%d: can't add, stack too sstackort\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	free(temp);
-	sum_2(stack);
+	temp = (*stack)->next;
+	(*stack)->next->n += (*stack)->n;
+	free(*stack);
+	temp->prev = NULL;
+	(*stack) = temp;
 }
