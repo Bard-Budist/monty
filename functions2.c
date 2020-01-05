@@ -71,5 +71,6 @@ void _mod(stack_t **stack, unsigned int line_number)
 void _pchar(stack_t **stack, unsigned int line_number)
 {
 	line_number = line_number;
-	printf("%c\n", (*stack)->n);
+	putchar((*stack)->n);
+	putchar('\n');
 }
