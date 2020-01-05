@@ -12,11 +12,11 @@ int main(int argc, const char *argv[])
 	FILE *file;
 	char *buffer = NULL;
 	size_t buffer_size = 80;
-	int j = 0;
+	int j = 1;
 
 	if (argc != 2)
 	{
-		fprintf(stderr, "USAGE: monty file");
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 	if (argv[1] == NULL)
@@ -24,20 +24,21 @@ int main(int argc, const char *argv[])
 	file = fopen(argv[1], "r");
 	if (file == NULL)
 	{
-		fprintf(stderr, "Error: Can't open file %s", argv[1]);
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 	buffer = malloc(buffer_size * sizeof(char));
 	if (buffer == NULL)
 	{
-		fprintf(stderr, "Error: malloc failed");
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 	while (-1 != getline(&buffer, &buffer_size, file))
 	{
 		if (callFunction(buffer, j) == 1)
 		{
-			fprintf(stderr, "L%d: unknown instruction %s", j, buffer);
+			fprintf(stderr, "L%d: unknown instruction %s\n", j, buffer);
+			free(buffer);
 			exit(EXIT_FAILURE);
 		}
 		j++;

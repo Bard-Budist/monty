@@ -18,6 +18,8 @@ int callFunction(char *tmp, int j)
 	};
 	j = j;
 	tem2 = strtok(tmp, deli);
+	if (tem2 == NULL)
+		return (0);
 	while (tipos[i].opcode != NULL)
 	{
 		if (strcmp(tem2, tipos[i].opcode) == 0)
@@ -25,9 +27,11 @@ int callFunction(char *tmp, int j)
 			tem2 = strtok(NULL, deli);
 			if (tem2 == NULL)
 				tem2 = "";
-			else if (strcmp(tem2, "0") != 0 && _atoi(tem2) == 0)
+			else if (strcmp(tem2, "0") != 0 && _atoi(tem2) == 0
+					&& strcmp(tipos[i].opcode, "pall") != 0)
 			{
-				fprintf(stderr, "L%d: usage: push integer", j);
+				free(tmp);
+				fprintf(stderr, "L%d: usage: push integer\n", j);
 				exit(EXIT_FAILURE);
 			}
 			if (strcmp(tipos[i].opcode, "pall") == 0)
