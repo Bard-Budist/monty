@@ -6,25 +6,13 @@
 */
 void _sub(stack_t **stack, unsigned int line_number)
 {
-	stack_t *tmp;
 	int cont = 0;
 
 	line_number = line_number;
-	if ((*stack)->next != NULL)
-	{
-		cont = (*stack)->next->n - (*stack)->n;
-		tmp = (*stack)->next;
-		tmp->n = cont;
-		free(*stack);
-		tmp->prev = NULL;
-		*stack = tmp;
-	}
-	else
-	{
-		fprintf(stderr, "L%d: can't sub, stack too short\n",
-				line_number);
-		exit(EXIT_FAILURE);
-	}
+	cont = (*stack)->next->n - (*stack)->n;
+	_pop(stack, cont);
+	_pop(stack, cont);
+	_push(stack, cont);
 }
 
 /**

@@ -91,6 +91,8 @@ int validateReturns(char *string, stack_t **stack)
 		return (5);
 	else if (strcmp(string, "add") == 0 && len < 2)
 		return (6);
+	else if (strcmp(string, "sub") == 0 && len < 2)
+		return (7);
 	else
 		return (0);
 }
