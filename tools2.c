@@ -75,12 +75,19 @@ int checkChar(char *string)
 */
 int validateReturns(char *string, stack_t **stack)
 {
+	int len = 0;
+	stack_t *tmp = *stack;
+
+	while (tmp != NULL)
+	{
+		len++;
+		tmp = tmp->next;
+	}
 	if (strcmp(string, "pint") == 0 && stack == NULL)
 		return (3);
 	else if (strcmp(string, "pop") == 0 && stack == NULL)
 		return (4);
-	else if (strcmp(string, "swap") == 0 &&
-			(stack == NULL || (*stack)->next == NULL))
+	else if (strcmp(string, "swap") == 0 && len < 2)
 		return (5);
 	else
 		return (0);
