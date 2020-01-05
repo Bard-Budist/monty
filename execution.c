@@ -29,6 +29,8 @@ int main(int argc, const char *argv[])
 	}
 	while (getline(&buffer, &buffer_size, file) != -1)
 	{
+		if (buffer[0] == '#')
+			continue;
 		printErrors(callFunction(buffer, j), j, buffer, file);
 		j++;
 	}
