@@ -66,29 +66,32 @@ void printErrors(int error, int line, char *buffer, FILE *file)
 	{
 		case 1:
 			fprintf(stderr, "L%i: unknown instruction %s\n", line, buffer);
+			break;
 		case 2:
 			fprintf(stderr, "L%i: usage: push integer\n", line);
+			break;
 		case 3:
 			fprintf(stderr, "L%i: can't pint, stack empty\n", line);
+			break;
 		case 4:
 			fprintf(stderr, "L%i: can't pop an empty stack\n", line);
+			break;
 		case 5:
 			fprintf(stderr, "L%i: can't swap, stack too short\n", line);
+			break;
 		case 6:
 			fprintf(stderr, "L%i: can't add, stack too short\n", line);
+			break;
 		case 7:
 			fprintf(stderr, "L%i: can't sub, stack too short\n", line);
+			break;
 		case 8:
 			fprintf(stderr, "L%i: can't div, stack too short\n", line);
-		case 9:
-			fprintf(stderr, "L%i: division by zero\n", line);
-		case 10:
-			fprintf(stderr, "L%d: can't mul, stack too short\n", line);
-		case 11:
-			fprintf(stderr, "L%d: can't mod, stack too short\n", line);
-		case 12:
-			fprintf(stderr, "L%d: division by zero\n", line);
+			break;
 	}
+	if (error > 8)
+		morePrintErrors(error, line, buffer, file);
+
 	if (error != 0)
 	{
 		freeAll(buffer, file);
@@ -105,4 +108,34 @@ void freeAll(char *buffer, FILE *file)
 	free(buffer);
 	free_dlistint(&stack);
 	fclose(file);
+}
+/**
+ * morePrintErrors - Print Error
+ * @error: Number of error
+ * @line: Line number
+ * @buffer: Buffer
+ * @file: File
+*/
+void morePrintErrors(int error, int line, char *buffer, FILE *file)
+{
+	switch (error)
+	{
+		case 9:
+			fprintf(stderr, "L%i: division by zero\n", line);
+			break;
+		case 10:
+			fprintf(stderr, "L%i: can't mul, stack too short\n", line);
+			break;
+		case 11:
+			fprintf(stderr, "L%i: can't mod, stack too short\n", line);
+			break;
+		case 12:
+			fprintf(stderr, "L%i: division by zero\n", line);
+			break;
+	}
+	if (error != 0)
+	{
+		freeAll(buffer, file);
+		exit(EXIT_FAILURE);
+	}
 }
