@@ -40,7 +40,7 @@ void _push(stack_t **stack, unsigned int line_number)
 void _pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new_node = *stack;
-	
+
 	if (stack != NULL || *stack != NULL)
 	{
 		line_number = line_number;
