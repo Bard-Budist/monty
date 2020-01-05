@@ -79,6 +79,8 @@ void printErrors(int error, int line, char *buffer, FILE *file)
 		case 5:
 			fprintf(stderr, "L%i: can't swap, stack too short\n", line);
 			break;
+		case 6:
+			fprintf(stderr, "L%i: can't add, stack too short\n", line);
 	}
 	if (error != 0)
 	{

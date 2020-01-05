@@ -99,21 +99,9 @@ void _swap(stack_t **stack, unsigned int line_number)
 */
 void _add(stack_t **stack, unsigned int line_number)
 {
-	int i = 0;
 	stack_t *temp;
 
-	temp = (*stack);
-
-	while (temp)
-	{
-		i++;
-		temp = temp->next;
-	}
-	if (i < 2)
-	{
-		fprintf(stderr, "L%d: can't add, stack too sstackort\n", line_number);
-		exit(EXIT_FAILURE);
-	}
+	line_number = line_number;
 	temp = (*stack)->next;
 	(*stack)->next->n += (*stack)->n;
 	free(*stack);
