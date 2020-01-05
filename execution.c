@@ -66,24 +66,24 @@ void printErrors(int error, int line, char *buffer, FILE *file)
 	{
 		case 1:
 			fprintf(stderr, "L%i: unknown instruction %s\n", line, buffer);
-			freeAll(buffer, file);
-			exit(EXIT_FAILURE);
 			break;
 		case 2:
 			fprintf(stderr, "L%i: usage: push integer\n", line);
-			freeAll(buffer, file);
-			exit(EXIT_FAILURE);
 			break;
 		case 3:
 			fprintf(stderr, "L%i: can't pint, stack empty\n", line);
-			freeAll(buffer, file);
-			exit(EXIT_FAILURE);
 			break;
 		case 4:
 			fprintf(stderr, "L%i: can't pop an empty stack\n", line);
-			freeAll(buffer, file);
-			exit(EXIT_FAILURE);
 			break;
+		case 5:
+			fprintf(stderr, "L%i: can't swap, stack too short\n", line);
+			break;
+	}
+	if (error != 0)
+	{
+		freeAll(buffer, file);
+		exit(EXIT_FAILURE);
 	}
 }
 /**

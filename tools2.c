@@ -8,7 +8,7 @@
 */
 int callFunction(char *tmp, int j)
 {
-	int i = 0;
+	int i = 0, retorno;
 	char *tem2;
 	char deli[] = "\n\t ";
 
@@ -30,10 +30,9 @@ int callFunction(char *tmp, int j)
 				tem2 = "";
 			if (strcmp(tipos[i].opcode, "push") == 0 && checkChar(tem2) == 1)
 				return (2);
-			else if (strcmp(tipos[i].opcode, "pint") == 0 && stack == NULL)
-				return (3);
-			else if (strcmp(tipos[i].opcode, "pop") == 0 && stack == NULL)
-				return (4);
+			retorno = validateReturns(tipos[i].opcode, &stack);
+			if (retorno != 0)
+				return (retorno);
 			if (strcmp(tipos[i].opcode, "pall") == 0)
 				tipos[i].f(&stack, j);
 			else
@@ -66,4 +65,23 @@ int checkChar(char *string)
 			return (1);
 	}
 	return (0);
+}
+/**
+ * validateReturns - Valida el retorno
+ * @string: String to compare
+ * @stack: stack
+ * Return: error number
+ *
+*/
+int validateReturns(char *string, stack_t **stack)
+{
+	if (strcmp(string, "pint") == 0 && stack == NULL)
+		return (3);
+	else if (strcmp(string, "pop") == 0 && stack == NULL)
+		return (4);
+	else if (strcmp(string, "swap") == 0 &&
+			(stack == NULL || (*stack)->next == NULL))
+		return (5);
+	else
+		return (0);
 }

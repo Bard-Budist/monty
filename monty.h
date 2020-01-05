@@ -54,4 +54,5 @@ int callFunction(char *tmp, int j);
 int checkChar(char *string);
 void printErrors(int error, int line, char *buffer, FILE *file);
 void freeAll(char *buffer, FILE *file);
+int validateReturns(char *string, stack_t **stack);
 #endif
