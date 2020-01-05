@@ -40,12 +40,15 @@ void _push(stack_t **stack, unsigned int line_number)
 void _pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new_node = *stack;
-
-	line_number = line_number;
-	while (new_node != NULL)
+	
+	if (stack != NULL || *stack != NULL)
 	{
-		printf("%i\n", new_node->n);
-		new_node = new_node->next;
+		line_number = line_number;
+		while (new_node != NULL)
+		{
+			printf("%i\n", new_node->n);
+			new_node = new_node->next;
+		}
 	}
 }
 /**
