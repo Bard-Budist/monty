@@ -48,5 +48,6 @@ void free_grid(char **grid, int height);
 void _add(stack_t **stack, unsigned int line_number);
 void sum_2(stack_t **stack);
 void _nop(stack_t **stack, unsigned int line_number);
-int callFunction(char *tmp, int j);
+int callFunction(char *tmp, int j, FILE *file);
+int checkChar(char *string);
 #endif

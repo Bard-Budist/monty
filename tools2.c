@@ -6,7 +6,7 @@
  * Return: 1 or 0
  *
 */
-int callFunction(char *tmp, int j)
+int callFunction(char *tmp, int j, FILE *file)
 {
 	int i = 0;
 	char *tem2;
@@ -28,10 +28,11 @@ int callFunction(char *tmp, int j)
 			tem2 = strtok(NULL, deli);
 			if (tem2 == NULL)
 				tem2 = "";
-			else if (strcmp(tem2, "0") != 0 && _atoi(tem2) == 0
-					&& strcmp(tipos[i].opcode, "pall") != 0)
+			else if (strcmp(tipos[i].opcode, "push") == 0 && checkChar(tem2) == 1)
 			{
 				free(tmp);
+				free_dlistint(&stack);
+				fclose(file);
 				fprintf(stderr, "L%i: usage: push integer\n", j);
 				exit(EXIT_FAILURE);
 			}
@@ -45,3 +46,22 @@ int callFunction(char *tmp, int j)
 	}
 	return (1);
 }
+int checkChar(char *string)
+{
+	int i = 0;
+	char s;
+
+	while (string[i] != '\0')
+	{
+		s = string[i];
+		if (s >= 48 && s <= 57)
+		{
+			i++;
+			continue;
+		}
+		else
+			return (1);
+	}
+	return (0);
+}
+

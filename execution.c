@@ -35,7 +35,7 @@ int main(int argc, const char *argv[])
 	}
 	while (-1 != getline(&buffer, &buffer_size, file))
 	{
-		if (callFunction(buffer, j) == 1)
+		if (callFunction(buffer, j, file) == 1)
 		{
 			fprintf(stderr, "L%i: unknown instruction %s\n", j, buffer);
 			free(buffer);
