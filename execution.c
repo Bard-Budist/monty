@@ -38,6 +38,7 @@ int main(int argc, const char *argv[])
 		if (callFunction(buffer, j, file) == 1)
 		{
 			fprintf(stderr, "L%i: unknown instruction %s\n", j, buffer);
+			fclose(file);
 			free(buffer);
 			free_dlistint(&stack);
 			exit(EXIT_FAILURE);
