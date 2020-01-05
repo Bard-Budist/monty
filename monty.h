@@ -35,9 +35,6 @@ typedef struct instruction_s
         char *opcode;
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
-int countCommands(char *buffer);
-void checkExecution(char * buffer);
-void executeCommand(char **Tokens);
 void _push(stack_t **stack, unsigned int line_number);
 void _pall(stack_t **stack, unsigned int line_number);
 void _pint(stack_t **stack, unsigned int line_number);
@@ -51,6 +48,5 @@ void free_grid(char **grid, int height);
 void _add(stack_t **stack, unsigned int line_number);
 void sum_2(stack_t **stack);
 void _nop(stack_t **stack, unsigned int line_number);
-int countTokens(char *string);
 int callFunction(char *tmp, int j);
 #endif
