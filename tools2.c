@@ -16,7 +16,8 @@ int callFunction(char *tmp, int j, FILE *file)
 	instruction_t tipos[] = {
 		{"push", _push}, {"pall", _pall}, {"pint", _pint},
 		{"pop", _pop}, {"add", _add}, {"nop", _nop},
-		{"swap", _swap}, {"sub", _sub}, {NULL, NULL}
+		{"swap", _swap}, {"sub", _sub}, {"div", _div}, 
+		{NULL, NULL}
 	};
 	j = j;
 	tem2 = strtok(tmp, deli);
