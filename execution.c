@@ -37,7 +37,7 @@ int main(int argc, const char *argv[])
 	{
 		if (callFunction(buffer, j) == 1)
 		{
-			fprintf(stderr, "L%d: unknown instruction %s\n", j, buffer);
+			fprintf(stderr, "L%i: unknown instruction %s\n", j, buffer);
 			free(buffer);
 			exit(EXIT_FAILURE);
 		}
