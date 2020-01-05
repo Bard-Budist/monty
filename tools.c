@@ -28,11 +28,15 @@ int _atoi(char *s)
 */
 void free_dlistint(stack_t **stack)
 {
+	stack_t *temp;
+
 	while (*stack != NULL)
 	{
-		free(*stack);
-		*stack = (*stack)->next;
+		temp = *stack;
+		*stack = temp->next;
+		free(temp);
 	}
+	free(*stack);
 }
 /**
  * sum_2 - Suma 2
