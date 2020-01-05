@@ -93,6 +93,10 @@ int validateReturns(char *string, stack_t **stack)
 		return (6);
 	else if (strcmp(string, "sub") == 0 && len < 2)
 		return (7);
+	else if (strcmp(string, "div") == 0 && len < 2)
+		return (8);
+	else if (strcmp(string, "div") == 0 && (*stack)->next->n == 0)
+		return (9);
 	else
 		return (0);
 }

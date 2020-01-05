@@ -85,6 +85,12 @@ void printErrors(int error, int line, char *buffer, FILE *file)
 		case 7:
 			fprintf(stderr, "L%i: can't sub, stack too short\n", line);
 			break;
+		case 8:
+			fprintf(stderr, "L%i: can't div, stack too short\n", line);
+			break;
+		case 9:
+			fprintf(stderr, "L%i: division by zero\n", line);
+			break;
 	}
 	if (error != 0)
 	{
