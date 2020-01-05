@@ -66,31 +66,28 @@ void printErrors(int error, int line, char *buffer, FILE *file)
 	{
 		case 1:
 			fprintf(stderr, "L%i: unknown instruction %s\n", line, buffer);
-			break;
 		case 2:
 			fprintf(stderr, "L%i: usage: push integer\n", line);
-			break;
 		case 3:
 			fprintf(stderr, "L%i: can't pint, stack empty\n", line);
-			break;
 		case 4:
 			fprintf(stderr, "L%i: can't pop an empty stack\n", line);
-			break;
 		case 5:
 			fprintf(stderr, "L%i: can't swap, stack too short\n", line);
-			break;
 		case 6:
 			fprintf(stderr, "L%i: can't add, stack too short\n", line);
-			break;
 		case 7:
 			fprintf(stderr, "L%i: can't sub, stack too short\n", line);
-			break;
 		case 8:
 			fprintf(stderr, "L%i: can't div, stack too short\n", line);
-			break;
 		case 9:
 			fprintf(stderr, "L%i: division by zero\n", line);
-			break;
+		case 10:
+			fprintf(stderr, "L%d: can't mul, stack too short\n", line);
+		case 11:
+			fprintf(stderr, "L%d: can't mod, stack too short\n", line);
+		case 12:
+			fprintf(stderr, "L%d: division by zero\n", line);
 	}
 	if (error != 0)
 	{

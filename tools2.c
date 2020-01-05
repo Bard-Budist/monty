@@ -99,12 +99,12 @@ int validateReturns(char *string, stack_t **stack)
 			&& len >= 2)
 		return (9);
 	else if (strcmp(string, "mul") == 0 && len < 2)
-                return (10);
+		return (10);
 	else if (strcmp(string, "mod") == 0 && len < 2)
-                return (11);
+		return (11);
 	else if (strcmp(string, "mod") == 0 && (*stack)->n == 0
-                        && len >= 2)
-                return (12);
+			&& len >= 2)
+		return (12);
 	else
 		return (0);
 }
