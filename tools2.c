@@ -32,7 +32,7 @@ int callFunction(char *tmp, int j)
 					&& strcmp(tipos[i].opcode, "pall") != 0)
 			{
 				free(tmp);
-				fprintf(stderr, "L<%i>: usage: push integer\n", j);
+				fprintf(stderr, "L%i: usage: push integer\n", j);
 				exit(EXIT_FAILURE);
 			}
 			if (strcmp(tipos[i].opcode, "pall") == 0)

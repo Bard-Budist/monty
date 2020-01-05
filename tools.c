@@ -24,16 +24,15 @@ int _atoi(char *s)
 }
 /**
  * free_dlistint - Free list
- * @head: Head
+ * @stack: Head
 */
-void free_dlistint(stack_t *head)
+void free_dlistint(stack_t **stack)
 {
-	while (head != NULL)
+	while (*stack != NULL)
 	{
-		free(head);
-		head = head->next;
+		free(*stack);
+		*stack = (*stack)->next;
 	}
-	free(head);
 }
 /**
  * sum_2 - Suma 2

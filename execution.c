@@ -39,12 +39,14 @@ int main(int argc, const char *argv[])
 		{
 			fprintf(stderr, "L%i: unknown instruction %s\n", j, buffer);
 			free(buffer);
+			free_dlistint(&stack);
 			exit(EXIT_FAILURE);
 		}
 		j++;
 	}
 	fclose(file);
 	free(buffer);
+	free_dlistint(&stack);
 	return (0);
 }
 
