@@ -83,9 +83,9 @@ int validateReturns(char *string, stack_t **stack)
 		len++;
 		tmp = tmp->next;
 	}
-	if (strcmp(string, "pint") == 0 && stack == NULL)
+	if (strcmp(string, "pint") == 0 && *stack == NULL)
 		return (3);
-	else if (strcmp(string, "pop") == 0 && stack == NULL)
+	else if (strcmp(string, "pop") == 0 && *stack == NULL)
 		return (4);
 	else if (strcmp(string, "swap") == 0 && len < 2)
 		return (5);
@@ -107,8 +107,8 @@ int validateReturns(char *string, stack_t **stack)
 		return (12);
 	else if (strcmp(string, "pchar") == 0 && stack == NULL)
 		return (13);
-	else if (strcmp(string, "pchar") == 0 && ((*stack)->n < 32
-			|| (*stack)->n > 125) && stack != NULL)
+	else if (strcmp(string, "pchar") == 0 && ((*stack)->n < 0
+			|| (*stack)->n > 127) && stack != NULL)
 		return (14);
 	else
 		return (0);
